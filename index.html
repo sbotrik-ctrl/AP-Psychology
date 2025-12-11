@@ -1,10 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>AP Psych Matching – Fall Final Review</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <style>
 :root {
   --bg: #e5edff;
@@ -12,34 +12,17 @@
   --card: #ffffff;
   --card-dark: #0b1220;
   --text: #0f172a;
-  --text-light: #ffffff;
   --text-muted: #6b7280;
   --text-dark: #e5e7eb;
-
   --primary: #2563eb;
   --border: #d1d5db;
-
   --correct: #bbf7d0;
   --correct-text: #14532d;
-
-  /* Category tile colors */
-  --purple-bg: rgba(168,85,247,0.20);
-  --purple-border: rgba(168,85,247,0.55);
-
-  --green-bg: rgba(34,197,94,0.20);
-  --green-border: rgba(34,197,94,0.55);
-
-  --blue-bg: rgba(59,130,246,0.20);
-  --blue-border: rgba(59,130,246,0.55);
-
-  --orange-bg: rgba(249,115,22,0.22);
-  --orange-border: rgba(249,115,22,0.60);
-
-  --pink-bg: rgba(236,72,153,0.22);
-  --pink-border: rgba(236,72,153,0.60);
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -50,8 +33,8 @@ body {
 }
 
 body.dark {
-  background: #020617 !important;
-  color: var(--text-dark) !important;
+  background: radial-gradient(circle at top, #020617 0, #020617 40%, #020617 100%);
+  color: var(--text-dark);
 }
 
 .page {
@@ -73,7 +56,6 @@ h3.subtitle {
   font-size: 0.95rem;
 }
 
-/* TOP BAR FIX FOR DARK MODE */
 #top-bar {
   margin-top: 14px;
   display: flex;
@@ -91,19 +73,21 @@ h3.subtitle {
   padding: 4px 10px;
   border-radius: 999px;
   border: 1px solid var(--border);
-  background: rgba(255,255,255,0.92);
-  color: var(--text);
+  background: rgba(255,255,255,0.9);
 }
 
 body.dark .toggle-group {
-  background: #1e293b;
-  border-color: #475569;
-  color: var(--text-dark);
+  background: #020617;
+  border-color: #1f2937;
 }
 
-/* CARDS */
+.toggle-group input {
+  cursor: pointer;
+}
+
+/* Cards */
 #menu-card, #game-card {
-  background: #ffffff;
+  background: rgba(255,255,255,0.98);
   border-radius: 18px;
   box-shadow: 0 12px 32px rgba(15,23,42,0.15);
   margin-top: 16px;
@@ -112,11 +96,11 @@ body.dark .toggle-group {
 
 body.dark #menu-card,
 body.dark #game-card {
-  background: #0f172a;
+  background: #020617;
   box-shadow: 0 18px 40px rgba(15,23,42,0.85);
 }
 
-/* MENU GRID */
+/* Menu grid */
 #menu-grid {
   margin-top: 8px;
   display: grid;
@@ -124,86 +108,134 @@ body.dark #game-card {
   gap: 14px;
 }
 
-/* CATEGORY TILES */
+/* Tiles */
 .tile {
   padding: 14px 12px;
   border-radius: 14px;
   border: 1px solid var(--border);
+  background: #ffffff;
   cursor: pointer;
   box-shadow: 0 4px 10px rgba(15,23,42,0.12);
   transition: transform 0.12s ease, box-shadow 0.12s ease;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.tile.dev { background: var(--purple-bg); border-color: var(--purple-border); }
-.tile.bio { background: var(--green-bg); border-color: var(--green-border); }
-.tile.cog { background: var(--blue-bg); border-color: var(--blue-border); }
-.tile.sens { background: var(--orange-bg); border-color: var(--orange-border); }
-.tile.stats { background: var(--pink-bg); border-color: var(--pink-border); }
+.tile-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+}
 
-.tile-header { display: flex; gap: 8px; align-items: center; }
+/* CATEGORY TILE COLORS — as requested */
 
+/* Development = soft purple */
+.tile.dev {
+  background: rgba(168, 85, 247, 0.20);
+  border-color: rgba(168, 85, 247, 0.55);
+}
+
+/* Biology = soft green */
+.tile.bio {
+  background: rgba(34, 197, 94, 0.20);
+  border-color: rgba(34, 197, 94, 0.55);
+}
+
+/* Cognition = soft blue */
+.tile.cog {
+  background: rgba(59, 130, 246, 0.20);
+  border-color: rgba(59, 130, 246, 0.55);
+}
+
+/* Sensation = soft orange */
+.tile.sens {
+  background: rgba(249, 115, 22, 0.22);
+  border-color: rgba(249, 115, 22, 0.60);
+}
+
+/* Research & Stats = soft pink */
+.tile.stats {
+  background: rgba(236, 72, 153, 0.22);
+  border-color: rgba(236, 72, 153, 0.60);
+}
+
+/* Icon styling (neutral over any color) */
 .tile-icon {
   width: 26px;
   height: 26px;
   border-radius: 999px;
   display: flex;
-  justify-content: center;
   align-items: center;
-  background: rgba(255,255,255,0.75);
+  justify-content: center;
   font-size: 1.1rem;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.tile-title {
+  font-weight: 600;
+  color: var(--text);
+}
+
+body.dark .tile-title {
+  color: var(--text-dark);
+}
+
+.tile-subtitle {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+body.dark .tile-subtitle {
+  color: #9ca3af;
 }
 
 .tile:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 16px rgba(15,23,42,0.35);
+  /* Keep background color from category */
 }
 
-/* GAME CARD HEADER */
+/* Game card layout */
 #game-header-row {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
+  gap: 10px;
   align-items: center;
 }
 
-/* RESTORED LARGE BUTTON */
-.button {
-  border: none;
-  border-radius: 999px;
-  padding: 10px 18px;
-  font-size: 0.95rem;
-  cursor: pointer;
-  background: #1d4ed8;
-  color: white;
-  box-shadow: 0 4px 12px rgba(37,99,235,0.5);
+#gameHeader {
+  margin: 0;
+  font-size: 1.3rem;
 }
 
-.button.secondary {
-  background: #475569;
-  color: white;
-}
-
-body.dark .button.secondary {
-  background: #334155;
-  color: white;
-}
-
-/* STATUS BAR */
 #status-bar {
   margin-top: 8px;
   padding: 6px 12px;
   display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
   justify-content: space-between;
+  align-items: center;
   border-radius: 999px;
   border: 1px solid #dbeafe;
   background: #eff6ff;
+  font-size: 0.9rem;
 }
 
 body.dark #status-bar {
-  background: #1e293b;
-  border-color: #3b82f6;
+  background: #020617;
+  border-color: #1d4ed8;
 }
 
-/* GAME COLUMNS */
+#score, #streak, #timerDisplay {
+  font-weight: 600;
+}
+
+/* Game columns */
 .container {
   margin-top: 14px;
   display: flex;
@@ -215,31 +247,43 @@ body.dark #status-bar {
   flex: 1 1 260px;
   background: #f9fafb;
   border-radius: 12px;
-  padding: 10px;
   border: 1px solid var(--border);
+  padding: 10px;
   max-height: 60vh;
   overflow-y: auto;
 }
 
 body.dark .column {
-  background: #1e293b;
-  border-color: #334155;
+  background: #020617;
+  border-color: #1f2937;
 }
 
-/* ITEMS */
+.column h3 {
+  margin: 0 0 6px;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+body.dark .column h3 {
+  color: #9ca3af;
+}
+
+/* Items */
 .item {
   padding: 7px 9px;
   margin: 3px 0;
   border-radius: 9px;
-  background: white;
   border: 1px solid #d1d5db;
+  background: #ffffff;
   cursor: pointer;
+  font-size: 0.92rem;
+  line-height: 1.3;
+  transition: background 0.12s ease, transform 0.08s ease, border-color 0.12s ease;
 }
 
 body.dark .item {
-  background: #0f172a;
-  border-color: #475569;
-  color: var(--text-dark);
+  background: #020617;
+  border-color: #1f2937;
 }
 
 .item:hover {
@@ -247,257 +291,470 @@ body.dark .item {
 }
 
 body.dark .item:hover {
-  background: #334155;
+  background: #020617;
+  border-color: #3b82f6;
 }
 
 .item.selected {
   outline: 2px solid var(--primary);
+  outline-offset: 1px;
 }
 
 .item.matched {
   background: var(--correct);
   border-color: #16a34a;
   color: var(--correct-text);
+  cursor: default;
 }
 
-#teachBlock {
-  background: rgba(0,0,0,0.05);
-  padding: 10px;
-  border-radius: 10px;
+body.dark .item.matched {
+  background: #14532d;
+  color: #bbf7d0;
 }
 
-body.dark #teachBlock {
-  background: rgba(255,255,255,0.08);
+/* Buttons */
+.button {
+  border: none;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background: #1d4ed8;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(37,99,235,0.5);
+  transition: background 0.12s ease, transform 0.08s ease, box-shadow 0.12s ease;
+}
+
+.button:hover {
+  background: #1e40af;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(37,99,235,0.7);
+}
+
+.button.secondary {
+  background: transparent;
+  color: var(--text);
+  box-shadow: none;
+  border: 1px solid var(--border);
+}
+
+body.dark .button.secondary {
+  color: var(--text-dark);
+  border-color: #4b5563;
+}
+
+.button.secondary:hover {
+  background: #f3f4f6;
+}
+
+body.dark .button.secondary:hover {
+  background: #020617;
+}
+
+/* Message & celebration */
+#message {
+  margin-top: 8px;
+  min-height: 1.2em;
+  font-weight: 500;
+  text-align: center;
+}
+
+#celebration {
+  margin-top: 6px;
+  text-align: center;
+  font-size: 1.4rem;
+  animation: pop 0.5s ease-out;
+}
+
+.hidden {
+  display: none;
+}
+
+@keyframes pop {
+  0% { transform: scale(0.6); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Teacher panel */
+#teacherPanel {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #0f172a;
+  color: #e5e7eb;
+  font-size: 0.85rem;
+  box-shadow: 0 12px 30px rgba(15,23,42,0.9);
+  max-width: 260px;
+  z-index: 50;
+  display: none;
+}
+
+#teacherPanel h4 {
+  margin: 0 0 6px;
+  font-size: 0.9rem;
+}
+
+#teacherPanel button {
+  margin-top: 4px;
+  width: 100%;
+  border-radius: 999px;
+  border: none;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+#teacherPanel .info {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin-top: 4px;
+}
+
+@media (max-width: 640px) {
+  .page { padding: 12px 10px 26px; }
+  h1 { font-size: 1.5rem; }
+  #menu-card, #game-card { padding: 16px 12px 18px; }
 }
 </style>
 </head>
 <body>
-
 <div class="page">
-<h1>AP Psych Matching Review</h1>
-<h3 class="subtitle">Tap a set, then match terms to definitions.</h3>
 
-<!-- TOP BAR -->
-<div id="top-bar">
-  <label class="toggle-group">
-    <input type="checkbox" id="darkToggle"> Dark Mode
-  </label>
-  <label class="toggle-group">
-    <input type="checkbox" id="timerToggle"> Timer
-  </label>
-  <label class="toggle-group">
-    <input type="checkbox" id="teachToggle"> Teach Mode
-  </label>
+  <h1>AP Psych Matching Review</h1>
+  <h3 class="subtitle">Tap a set, then match terms to definitions. Use toggles to adjust difficulty.</h3>
+
+  <div id="top-bar">
+    <label class="toggle-group">
+      <input type="checkbox" id="darkToggle">
+      <span>Dark mode</span>
+    </label>
+    <label class="toggle-group">
+      <input type="checkbox" id="timerToggle">
+      <span>Timer</span>
+    </label>
+    <label class="toggle-group">
+      <input type="checkbox" id="teachToggle">
+      <span>Teach-me first</span>
+    </label>
+  </div>
+
+  <!-- MENU -->
+  <div id="menu-card">
+    <p style="margin:6px 2px 10px; font-size:0.9rem; color:var(--text-muted);">
+      Choose a topic set (about 8 pairs each). <strong>Hint:</strong> Press <kbd>Shift</kbd>+<kbd>T</kbd> to open the hidden teacher tools.
+    </p>
+    <div id="menu-grid">
+      <!-- Development (purple) -->
+      <div class="tile dev" data-group="1">
+        <div class="tile-header">
+          <div class="tile-icon">🧸</div>
+          <div>
+            <div class="tile-title">Group 1: Attachment</div>
+            <div class="tile-subtitle">Attachment & parenting</div>
+          </div>
+        </div>
+      </div>
+      <div class="tile dev" data-group="2">
+        <div class="tile-header">
+          <div class="tile-icon">🌱</div>
+          <div>
+            <div class="tile-title">Group 2: Erikson</div>
+            <div class="tile-subtitle">Psychosocial stages</div>
+          </div>
+        </div>
+      </div>
+      <div class="tile dev" data-group="3">
+        <div class="tile-header">
+          <div class="tile-icon">🎓</div>
+          <div>
+            <div class="tile-title">Group 3: Identity</div>
+            <div class="tile-subtitle">Marcia identity statuses</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Biology (green) -->
+      <div class="tile bio" data-group="4">
+        <div class="tile-header">
+          <div class="tile-icon">💊</div>
+          <div>
+            <div class="tile-title">Group 4: Neurotransmitters</div>
+            <div class="tile-subtitle">Chemicals & disorders</div>
+          </div>
+        </div>
+      </div>
+      <div class="tile bio" data-group="5">
+        <div class="tile-header">
+          <div class="tile-icon">🔋</div>
+          <div>
+            <div class="tile-title">Group 5: Nervous System</div>
+            <div class="tile-subtitle">CNS, PNS & divisions</div>
+          </div>
+        </div>
+      </div>
+      <div class="tile bio" data-group="6">
+        <div class="tile-header">
+          <div class="tile-icon">🧠</div>
+          <div>
+            <div class="tile-title">Group 6: Brain Structures</div>
+            <div class="tile-subtitle">Key brain regions</div>
+          </div>
+        </div>
+      </div>
+      <div class="tile bio" data-group="7">
+        <div class="tile-header">
+          <div class="tile-icon">⚡</div>
+          <div>
+            <div class="tile-title">Group 7: Neurons</div>
+            <div class="tile-subtitle">Parts & firing</div>
+          </div>
+        </div>
+      </div>
+      <div class="tile bio" data-group="8">
+        <div class="tile-header">
+          <div class="tile-icon">💤</div>
+          <div>
+            <div class="tile-title">Group 8: Sleep & Drugs</div>
+            <div class="tile-subtitle">Sleep, consciousness, substances</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cognition (blue) -->
+      <div class="tile cog" data-group="9">
+        <div class="tile-header">
+          <div class="tile-icon">💭</div>
+          <div>
+            <div class="tile-title">Group 9: Memory</div>
+            <div class="tile-subtitle">Processes & effects</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sensation & Perception (orange) -->
+      <div class="tile sens" data-group="10">
+        <div class="tile-header">
+          <div class="tile-icon">👁</div>
+          <div>
+            <div class="tile-title">Group 10: Sensation & Perception</div>
+            <div class="tile-subtitle">Basics & processing</div>
+          </div>
+        </div>
+      </div>
+      <div class="tile sens" data-group="11">
+        <div class="tile-header">
+          <div class="tile-icon">🔷</div>
+          <div>
+            <div class="tile-title">Group 11: Gestalt & Depth</div>
+            <div class="tile-subtitle">Gestalt & depth cues</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Research & Stats (pink) -->
+      <div class="tile stats" data-group="12">
+        <div class="tile-header">
+          <div class="tile-icon">🔬</div>
+          <div>
+            <div class="tile-title">Group 12: Research I</div>
+            <div class="tile-subtitle">Core methods & variables</div>
+          </div>
+        </div>
+      </div>
+      <div class="tile stats" data-group="13">
+        <div class="tile-header">
+          <div class="tile-icon">📊</div>
+          <div>
+            <div class="tile-title">Group 13: Stats I & II</div>
+            <div class="tile-subtitle">Descriptives & correlation</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GAME CARD -->
+  <div id="game-card" class="hidden">
+    <div id="game-header-row">
+      <div>
+        <h2 id="gameHeader"></h2>
+        <p style="margin:0; font-size:0.85rem; color:var(--text-muted);">
+          Tap a term, then tap its matching definition.
+        </p>
+      </div>
+      <button class="button secondary" id="backBtn">Back to menu</button>
+    </div>
+
+    <div id="status-bar">
+      <span id="score">Score: 0 / 0</span>
+      <span id="streak">Streak: 0</span>
+      <span id="timerDisplay">Time: 0s</span>
+    </div>
+
+    <div class="container">
+      <div class="column" id="termsCol"><h3>Terms</h3></div>
+      <div class="column" id="defsCol"><h3>Definitions</h3></div>
+    </div>
+
+    <div id="teachBlock" class="hidden" style="margin-top:10px; font-size:0.85rem;"></div>
+
+    <p id="message"></p>
+    <div id="celebration" class="hidden"></div>
+
+    <div style="margin-top:10px; display:flex; flex-wrap:wrap; gap:8px;">
+      <button class="button secondary" id="resetBtn">Restart set</button>
+    </div>
+  </div>
+
+  <!-- TEACHER PANEL -->
+  <div id="teacherPanel">
+    <h4>Teacher Tools</h4>
+    <button id="revealBtn">Reveal all answers</button>
+    <button id="resetProgressBtn" style="margin-top:4px;">Reset progress (local)</button>
+    <div class="info">
+      Toggle with <strong>Shift+T</strong>. These tools are invisible to students unless you open them.
+    </div>
+  </div>
+
 </div>
 
-<!-- MENU CARD -->
-<div id="menu-card">
-  <p style="margin:6px 2px 10px; font-size:0.9rem; color:var(--text-muted);">
-    Choose a topic set (8–10 pairs per group).  
-    <strong>Hint:</strong> Press <kbd>Shift</kbd> + <kbd>T</kbd> for teacher tools.
-  </p>
-
-  <div id="menu-grid">
-
-    <!-- DEVELOPMENT -->
-    <div class="tile dev" data-group="1">
-      <div class="tile-header">
-        <div class="tile-icon">🧸</div>
-        <div>
-          <div class="tile-title">Group 1: Attachment</div>
-          <div class="tile-subtitle">Ainsworth, parenting styles</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="tile dev" data-group="2">
-      <div class="tile-header">
-        <div class="tile-icon">🌱</div>
-        <div>
-          <div class="tile-title">Group 2: Erikson</div>
-          <div class="tile-subtitle">Psychosocial stages</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="tile dev" data-group="3">
-      <div class="tile-header">
-        <div class="tile-icon">🎓</div>
-        <div>
-          <div class="tile-title">Group 3: Identity</div>
-          <div class="tile-subtitle">Marcia’s Identity Theory</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- BIOLOGY -->
-    <div class="tile bio" data-group="4">
-      <div class="tile-header">
-        <div class="tile-icon">💊</div>
-        <div>
-          <div class="tile-title">Group 4: Neurotransmitters</div>
-          <div class="tile-subtitle">Effects & imbalances</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="tile bio" data-group="5">
-      <div class="tile-header">
-        <div class="tile-icon">🔋</div>
-        <div>
-          <div class="tile-title">Group 5: Nervous System</div>
-          <div class="tile-subtitle">Divisions & functions</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="tile bio" data-group="6">
-      <div class="tile-header">
-        <div class="tile-icon">🧠</div>
-        <div>
-          <div class="tile-title">Group 6: Brain Structures</div>
-          <div class="tile-subtitle">Regions & functions</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="tile bio" data-group="7">
-      <div class="tile-header">
-        <div class="tile-icon">⚡</div>
-        <div>
-          <div class="tile-title">Group 7: Neurons</div>
-          <div class="tile-subtitle">Parts & firing</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="tile bio" data-group="8">
-      <div class="tile-header">
-        <div class="tile-icon">💤</div>
-        <div>
-          <div class="tile-title">Group 8: Sleep & Drugs</div>
-          <div class="tile-subtitle">Consciousness</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- COGNITION -->
-    <div class="tile cog" data-group="9">
-      <div class="tile-header">
-        <div class="tile-icon">💭</div>
-        <div>
-          <div class="tile-title">Group 9: Memory</div>
-          <div class="tile-subtitle">Processes & effects</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SENSATION & PERCEPTION -->
-    <div class="tile sens" data-group="10">
-      <div class="tile-header">
-        <div class="tile-icon">👁</div>
-        <div>
-          <div class="tile-title">Group 10: Sensation</div>
-          <div class="tile-subtitle">Detection & thresholds</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="tile sens" data-group="11">
-      <div class="tile-header">
-        <div class="tile-icon">🔷</div>
-        <div>
-          <div class="tile-title">Group 11: Gestalt & Depth</div>
-          <div class="tile-subtitle">Gestalt rules</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- RESEARCH & STATS -->
-    <div class="tile stats" data-group="12">
-      <div class="tile-header">
-        <div class="tile-icon">🔬</div>
-        <div>
-          <div class="tile-title">Group 12: Research Methods</div>
-          <div class="tile-subtitle">Variables & design</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="tile stats" data-group="13">
-      <div class="tile-header">
-        <div class="tile-icon">📊</div>
-        <div>
-          <div class="tile-title">Group 13: Statistics I & II</div>
-          <div class="tile-subtitle">Descriptives + correlation</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="tile stats" data-group="14">
-      <div class="tile-header">
-        <div class="tile-icon">📈</div>
-        <div>
-          <div class="tile-title">Group 14: Data Analysis</div>
-          <div class="tile-subtitle">Quantitative vs qualitative</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="tile stats" data-group="15">
-      <div class="tile-header">
-        <div class="tile-icon">⚖️</div>
-        <div>
-          <div class="tile-title">Group 15: Ethics</div>
-          <div class="tile-subtitle">APA rules</div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- GAME CARD -->
-<div id="game-card" class="hidden">
-
-  <div id="game-header-row">
-    <div>
-      <h2 id="gameHeader"></h2>
-      <p style="margin:0; font-size:0.85rem; color:var(--text-muted);">
-        Select a term, then tap its matching definition.
-      </p>
-    </div>
-
-    <button class="button secondary" id="backBtn">Back to Menu</button>
-  </div>
-
-  <div id="status-bar">
-    <span id="score">Score: 0 / 0</span>
-    <span id="streak">Streak: 0</span>
-    <span id="timerDisplay">Time: 0s</span>
-  </div>
-
-  <div class="container">
-    <div class="column" id="termsCol">
-      <h3>Terms</h3>
-    </div>
-
-    <div class="column" id="defsCol">
-      <h3>Definitions</h3>
-    </div>
-  </div>
-
-  <div id="teachBlock" class="hidden" style="margin-top:10px; font-size:0.85rem;"></div>
-
-  <p id="message"></p>
-  <div id="celebration" class="hidden"></div>
-
-  <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
-    <button class="button secondary" id="resetBtn">Restart Set</button>
-  </div>
-
-</div> <!-- END GAME CARD -->
 <script>
+// ---------- DATA: ALL MATCHING GROUPS ----------
+const groups = {
+  1: [ // Attachment & Parenting
+    ["Secure attachment","Comforted when caregiver returns after distress"],
+    ["Avoidant attachment","Little distress on separation; avoids caregiver"],
+    ["Anxious / ambivalent attachment","Clingy and hard to soothe on reunion"],
+    ["Harlow’s research","Monkeys preferred soft cloth “mother” to wire one with food"],
+    ["Authoritative parenting","Warm + high expectations; best outcomes"],
+    ["Authoritarian parenting","Strict, low warmth; obedience focused"],
+    ["Permissive parenting","High warmth, few limits; low self-control in kids"],
+    ["Neglectful parenting","Low warmth and low control; worst outcomes"]
+  ],
+  2: [ // Erikson
+    ["Trust vs mistrust","Infants learn world is safe when needs are reliably met"],
+    ["Autonomy vs shame","Toddlers develop independence and self-control"],
+    ["Initiative vs guilt","Young children take initiative in planning and play"],
+    ["Industry vs inferiority","Elementary kids develop competence in school & skills"],
+    ["Identity vs role confusion","Teens explore who they are and their values"],
+    ["Intimacy vs isolation","Young adults form close relationships"],
+    ["Generativity vs stagnation","Middle adulthood: work, parenting, contribution"],
+    ["Integrity vs despair","Late adulthood: reflect on life with satisfaction or regret"]
+  ],
+  3: [ // Identity statuses
+    ["Identity achievement","Explored options and made commitments"],
+    ["Identity diffusion","No exploration and no commitment"],
+    ["Moratorium","Exploring but not yet committed"],
+    ["Foreclosure","Committed without exploring alternatives"],
+    ["Exploration","Actively considering different roles and values"],
+    ["Commitment","Psychological investment in a chosen direction"],
+    ["Self-concept","Overall view of who you are"],
+    ["Future direction","Plans for career, values, and lifestyle"]
+  ],
+  4: [ // Neurotransmitters
+    ["Serotonin","Low levels linked to depression"],
+    ["Dopamine","High levels linked to schizophrenia; involved in reward"],
+    ["Acetylcholine","Important for memory; low in Alzheimer’s disease"],
+    ["Endorphins","Natural painkillers; produce euphoria"],
+    ["Norepinephrine","Arousal and alertness"],
+    ["GABA","Main inhibitory/calming neurotransmitter"],
+    ["Glutamate","Major excitatory transmitter; learning and memory"],
+    ["SSRI (like Prozac)","Blocks serotonin reuptake so more stays in synapse"]
+  ],
+  5: [ // Nervous system
+    ["Central nervous system (CNS)","Brain and spinal cord"],
+    ["Peripheral nervous system (PNS)","All nerves connecting body and CNS"],
+    ["Somatic nervous system","Controls voluntary skeletal muscles"],
+    ["Autonomic nervous system","Controls involuntary organs and glands"],
+    ["Sympathetic nervous system","Fight-or-flight activation"],
+    ["Parasympathetic nervous system","Rest-and-digest; calms body"],
+    ["Motor neurons","Carry messages from CNS to muscles"],
+    ["Sensory neurons","Carry information from senses to CNS"]
+  ],
+  6: [ // Brain structures
+    ["Amygdala","Involved in fear and aggression"],
+    ["Hippocampus","Forms new explicit memories"],
+    ["Hypothalamus","Regulates drives like hunger, thirst, and body temp"],
+    ["Pituitary gland","“Master gland” that releases many hormones"],
+    ["Thalamus","Sensory relay station to cortex"],
+    ["Medulla","Controls heartbeat and breathing"],
+    ["Pons","Helps with sleep and arousal"],
+    ["Cerebellum","Balance, coordination, and fine motor skills"]
+  ],
+  7: [ // Neurons & communication
+    ["Dendrites","Receive incoming messages from other neurons"],
+    ["Cell body (soma)","Contains nucleus; keeps neuron alive"],
+    ["Axon","Sends messages away from the neuron"],
+    ["Myelin sheath","Fatty coating that speeds neural impulses"],
+    ["Synapse","Gap between neurons where neurotransmitters cross"],
+    ["Reuptake","Neurotransmitters are taken back into sending neuron"],
+    ["Action potential","All-or-none electrical impulse down the axon"],
+    ["All-or-none response","Neuron either fires completely or not at all"]
+  ],
+  8: [ // Sleep & Drugs (high level)
+    ["Circadian rhythm","Biological clock that regulates sleep-wake cycle"],
+    ["REM sleep","Stage with vivid dreams and muscle paralysis"],
+    ["Sleep deprivation","Lack of sleep; impairs attention and memory"],
+    ["Tolerance","Needing more of a drug to get same effect"],
+    ["Withdrawal","Discomfort when drug use is stopped"],
+    ["Depressants","Drugs that slow CNS (e.g., alcohol)"],
+    ["Stimulants","Drugs that speed CNS (e.g., caffeine, nicotine)"],
+    ["Hallucinogens","Drugs that distort perceptions (e.g., LSD, marijuana)"]
+  ],
+  9: [ // Memory basics
+    ["Encoding","Getting information into memory"],
+    ["Storage","Keeping information over time"],
+    ["Retrieval","Getting information back out of memory"],
+    ["Primacy effect","Better recall for items at beginning of a list"],
+    ["Recency effect","Better recall for items at end of a list"],
+    ["Chunking","Grouping info into meaningful units to remember more"],
+    ["Method of loci","Memory strategy linking items to locations"],
+    ["Flashbulb memory","Vivid memory of emotionally significant event"]
+  ],
+  10: [ // Sensation & Perception
+    ["Sensation","Detecting physical energy from the environment"],
+    ["Perception","Organizing and interpreting sensory information"],
+    ["Absolute threshold","Minimum stimulation needed to detect a stimulus 50% of the time"],
+    ["Difference threshold (JND)","Smallest detectable difference between two stimuli"],
+    ["Sensory adaptation","Reduced sensitivity after constant stimulation"],
+    ["Selective attention","Focusing on one stimulus while ignoring others"],
+    ["Top-down processing","Using expectations and prior knowledge to interpret input"],
+    ["Bottom-up processing","Building perception from basic sensory input"]
+  ],
+  11: [ // Gestalt & Depth
+    ["Figure-ground","Seeing objects as separate from background"],
+    ["Closure","Filling in gaps to see a complete object"],
+    ["Proximity","Grouping nearby figures together"],
+    ["Similarity","Grouping similar items together"],
+    ["Linear perspective","Parallel lines appear to converge in distance"],
+    ["Retinal disparity","Slight difference between images from each eye"],
+    ["Convergence","Inward turning of eyes for close objects"],
+    ["Interposition","Object blocking another is perceived as closer"]
+  ],
+  12: [ // Research Methods Part 1
+    ["Hypothesis","A testable prediction about the relationship between variables"],
+    ["Operational definition","Exact, measurable definition of a variable"],
+    ["Independent variable","Variable that is manipulated by the researcher"],
+    ["Dependent variable","Variable that is measured as the outcome"],
+    ["Confounding variable","Extra factor that could influence results"],
+    ["Random assignment","Participants have equal chance of being in any group"],
+    ["Random sample","Participants selected so each member of population has equal chance"],
+    ["Population","Entire group of people the researcher is interested in"]
+  ],
+  13: [ // Stats I & II
+    ["Mean","Arithmetic average of a set of scores"],
+    ["Median","Middle score when scores are ordered"],
+    ["Mode","Most frequently occurring score"],
+    ["Range","Highest score minus lowest score"],
+    ["Standard deviation","How much scores vary around the mean"],
+    ["Correlation coefficient (r)","Number from −1 to +1 showing strength & direction of relationship"],
+    ["Positive correlation","Variables move in same direction"],
+    ["Negative correlation","One variable increases as the other decreases"]
+  ]
+};
+
 // ---------- STATE ----------
 let currentGroup = null;
 let termSelection = null;
@@ -531,7 +788,6 @@ function openSet(num) {
   $("gameHeader").textContent = `Group ${num}`;
   $("message").textContent = "";
   $("celebration").classList.add("hidden");
-
   streak = 0;
   score = 0;
   updateScoreAndStreak();
@@ -545,7 +801,6 @@ function openSet(num) {
   }
 
   buildColumns();
-
   if (teachMode) showTeachBlock();
   else $("teachBlock").classList.add("hidden");
 }
@@ -553,7 +808,6 @@ function openSet(num) {
 function buildColumns() {
   const termsCol = $("termsCol");
   const defsCol = $("defsCol");
-
   termsCol.innerHTML = "<h3>Terms</h3>";
   defsCol.innerHTML = "<h3>Definitions</h3>";
 
@@ -586,78 +840,67 @@ function buildColumns() {
 function showTeachBlock() {
   const el = $("teachBlock");
   el.classList.remove("hidden");
-
-  let html = "<strong>Study view:</strong><ul style='margin-top:4px; padding-left:18px;'>";
-  currentGroup.forEach(([t, d]) => {
+  let html = "<strong>Study view:</strong> Terms with definitions<br><ul style='margin:4px 0 0;padding-left:18px;'>";
+  currentGroup.forEach(([t,d]) => {
     html += `<li><strong>${t}</strong>: ${d}</li>`;
   });
   html += "</ul>";
-
   el.innerHTML = html;
 }
 
 function selectTerm(el) {
   if (el.classList.contains("matched")) return;
-
   termSelection = el;
   document.querySelectorAll("#termsCol .item").forEach(e => e.classList.remove("selected"));
   el.classList.add("selected");
-
   tryMatch();
 }
 
 function selectDef(el) {
   if (el.classList.contains("matched")) return;
-
   defSelection = el;
   document.querySelectorAll("#defsCol .item").forEach(e => e.classList.remove("selected"));
   el.classList.add("selected");
-
   tryMatch();
 }
 
 function tryMatch() {
   if (!termSelection || !defSelection) return;
 
-  const correct = termSelection.dataset.index === defSelection.dataset.index;
-
-  if (correct) {
+  const isMatch = termSelection.dataset.index === defSelection.dataset.index;
+  if (isMatch) {
     termSelection.classList.add("matched");
     defSelection.classList.add("matched");
     termSelection.classList.remove("selected");
     defSelection.classList.remove("selected");
-
     termSelection = null;
     defSelection = null;
 
     score++;
     streak++;
-    $("message").textContent = "✅ Correct!";
+    $("message").textContent = "✅ Correct match!";
     updateScoreAndStreak();
 
     if (score === currentGroup.length) {
       endRoundSuccess();
     }
-
   } else {
     streak = 0;
-    $("message").textContent = "❌ Try again.";
-
+    $("message").textContent = "❌ Not a match. Try again.";
     const t = termSelection;
     const d = defSelection;
-
     termSelection = null;
     defSelection = null;
-
     setTimeout(() => {
       t.classList.remove("selected");
       d.classList.remove("selected");
-    }, 300);
+    }, 350);
   }
 }
 
 function updateScoreAndStreak() {
-  $("score").textContent = `Score: ${score} / ${currentGroup.length}`;
+  const total = currentGroup ? currentGroup.length : 0;
+  $("score").textContent = `Score: ${score} / ${total}`;
   $("streak").textContent = `Streak: ${streak}`;
 }
 
@@ -668,13 +911,12 @@ function updateTimer() {
 }
 
 function endRoundSuccess() {
-  $("message").textContent = "🎉 All matches found!";
-  $("celebration").textContent = "✨ Great job! ✨";
-  $("celebration").classList.remove("hidden");
-
+  $("message").textContent = "🎉 All matches found! Great work!";
+  const cel = $("celebration");
+  cel.textContent = "✨ Nice job! ✨";
+  cel.classList.remove("hidden");
   if (timerInterval) clearInterval(timerInterval);
 }
-
 // ---------- TEACHER TOOLS ----------
 let teacherPanelVisible = false;
 
@@ -685,83 +927,89 @@ function toggleTeacherPanel() {
 
 function revealAllAnswers() {
   if (!currentGroup) return;
-
-  document.querySelectorAll("#termsCol .item").forEach(e => e.classList.add("matched"));
-  document.querySelectorAll("#defsCol .item").forEach(e => e.classList.add("matched"));
-
+  document.querySelectorAll("#termsCol .item").forEach(e => {
+    e.classList.add("matched");
+  });
+  document.querySelectorAll("#defsCol .item").forEach(e => {
+    e.classList.add("matched");
+  });
   score = currentGroup.length;
   updateScoreAndStreak();
-
-  $("message").textContent = "👀 All answers revealed.";
+  $("message").textContent = "👀 Teacher reveal: all matches shown.";
 }
 
 function resetProgress() {
   streak = 0;
-  $("message").textContent = "Progress reset.";
+  $("message").textContent = "Progress cleared for this session.";
 }
 
 // ---------- EVENT HOOKUP ----------
 document.addEventListener("DOMContentLoaded", () => {
-
-  // Load menu tiles
+  // Menu tiles
   document.querySelectorAll(".tile").forEach(tile => {
-    tile.onclick = () => openSet(parseInt(tile.dataset.group));
+    tile.addEventListener("click", () => {
+      const group = parseInt(tile.dataset.group, 10);
+      if (!isNaN(group)) openSet(group);
+    });
   });
 
-  // Back to menu
-  $("backBtn").onclick = () => {
+  // Back & restart
+  $("backBtn").addEventListener("click", () => {
     $("game-card").classList.add("hidden");
     $("menu-card").classList.remove("hidden");
-    $("celebration").classList.add("hidden");
     $("message").textContent = "";
-
+    $("celebration").classList.add("hidden");
     if (timerInterval) clearInterval(timerInterval);
-  };
+  });
 
-  // Restart set
-  $("resetBtn").onclick = () => {
-    if (!currentGroup) return;
-
-    $("message").textContent = "";
-    $("celebration").classList.add("hidden");
-
-    buildColumns();
-    if (teachMode) showTeachBlock();
-
-    if (timerOn) {
-      if (timerInterval) clearInterval(timerInterval);
-      startTime = Date.now();
-      timerInterval = setInterval(updateTimer, 250);
+  $("resetBtn").addEventListener("click", () => {
+    if (currentGroup) {
+      $("message").textContent = "";
+      $("celebration").classList.add("hidden");
+      buildColumns();
+      if (teachMode) showTeachBlock();
+      if (timerOn) {
+        if (timerInterval) clearInterval(timerInterval);
+        startTime = Date.now();
+        timerInterval = setInterval(updateTimer, 250);
+      }
     }
-  };
+  });
 
   // Toggles
-  $("darkToggle").onchange = e => {
-    document.body.classList.toggle("dark", e.target.checked);
-  };
+  $("darkToggle").addEventListener("change", e => {
+    if (e.target.checked) {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+  });
 
-  $("timerToggle").onchange = e => {
+  $("timerToggle").addEventListener("change", e => {
     timerOn = e.target.checked;
     if (!timerOn && timerInterval) {
       clearInterval(timerInterval);
       $("timerDisplay").textContent = "Time: 0s";
     }
-  };
+  });
 
-  $("teachToggle").onchange = e => {
+  $("teachToggle").addEventListener("change", e => {
     teachMode = e.target.checked;
     if (teachMode && currentGroup) showTeachBlock();
     else $("teachBlock").classList.add("hidden");
-  };
+  });
 
-  // Teacher panel shortcuts
-  $("revealBtn").onclick = revealAllAnswers;
-  $("resetProgressBtn").onclick = resetProgress;
+  // Teacher panel buttons
+  $("revealBtn").addEventListener("click", revealAllAnswers);
+  $("resetProgressBtn").addEventListener("click", resetProgress);
 
+  // Hidden teacher shortcut: Shift + T
   document.addEventListener("keydown", e => {
-    if (e.shiftKey && e.key.toLowerCase() === "t") {
+    if (e.key.toLowerCase() === "t" && e.shiftKey) {
       toggleTeacherPanel();
     }
   });
 });
 </script>
+</body>
+</html>
