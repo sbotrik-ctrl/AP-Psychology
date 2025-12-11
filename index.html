@@ -12,45 +12,46 @@
   --card: #ffffff;
   --card-dark: #0b1220;
   --text: #0f172a;
+  --text-light: #ffffff;
   --text-muted: #6b7280;
   --text-dark: #e5e7eb;
+
   --primary: #2563eb;
   --border: #d1d5db;
+
   --correct: #bbf7d0;
   --correct-text: #14532d;
+
+  /* Category tile colors */
+  --purple-bg: rgba(168,85,247,0.20);
+  --purple-border: rgba(168,85,247,0.55);
+
+  --green-bg: rgba(34,197,94,0.20);
+  --green-border: rgba(34,197,94,0.55);
+
+  --blue-bg: rgba(59,130,246,0.20);
+  --blue-border: rgba(59,130,246,0.55);
+
+  --orange-bg: rgba(249,115,22,0.22);
+  --orange-border: rgba(249,115,22,0.60);
+
+  --pink-bg: rgba(236,72,153,0.22);
+  --pink-border: rgba(236,72,153,0.60);
 }
 
 * { box-sizing: border-box; }
 
 body {
-  margin: 0; padding: 0;
-  font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  background: radial-gradient(circle at top,#dbeafe 0,#f9fafb 40%,#e5e7eb 100%);
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #dbeafe 0, #f9fafb 40%, #e5e7eb 100%);
   color: var(--text);
 }
+
 body.dark {
-  background: #020617;
-  color: var(--text-dark);
-}
-/* FIX DARK MODE TILE + ITEM CONTRAST */
-body.dark .tile,
-body.dark .column,
-body.dark .item {
-  background: #1e293b !important;  /* dark slate background */
-  color: #f1f5f9 !important;        /* bright readable text */
-  border-color: #334155 !important;
-}
-
-body.dark .item.matched {
-  background: #14532d !important;   /* readable green */
-  color: #d1fae5 !important;
-}
-
-body.dark h3,
-body.dark #status-bar span,
-body.dark #gameHeader,
-body.dark #message {
-  color: #f1f5f9 !important;
+  background: #020617 !important;
+  color: var(--text-dark) !important;
 }
 
 .page {
@@ -59,149 +60,416 @@ body.dark #message {
   padding: 16px 16px 40px;
 }
 
-h1 { text-align:center; margin: 12px 0 4px; font-size: 1.9rem; }
-h3.subtitle { text-align:center; margin:0; color:var(--text-muted); font-size:0.95rem; }
+h1 {
+  text-align: center;
+  margin: 12px 0 4px;
+  font-size: 1.9rem;
+}
 
+h3.subtitle {
+  text-align: center;
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* TOP BAR FIX FOR DARK MODE */
 #top-bar {
-  margin-top:14px;
-  display:flex; flex-wrap:wrap; gap:8px;
-  justify-content:center; align-items:center;
-  font-size:0.85rem;
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.85rem;
 }
 
 .toggle-group {
-  display:flex; align-items:center; gap:4px;
-  padding:4px 10px;
-  border-radius:999px;
-  border:1px solid var(--border);
-  background:rgba(255,255,255,0.9);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.92);
+  color: var(--text);
 }
 
+body.dark .toggle-group {
+  background: #1e293b;
+  border-color: #475569;
+  color: var(--text-dark);
+}
+
+/* CARDS */
 #menu-card, #game-card {
-  background: rgba(255,255,255,0.98);
-  border-radius:18px;
-  box-shadow:0 12px 32px rgba(15,23,42,0.15);
-  margin-top:16px;
-  padding:18px 16px 20px;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 12px 32px rgba(15,23,42,0.15);
+  margin-top: 16px;
+  padding: 18px 16px 20px;
 }
 
-body.dark #menu-card, body.dark #game-card {
-  background:#020617;
-  box-shadow:0 18px 40px rgba(15,23,42,0.85);
+body.dark #menu-card,
+body.dark #game-card {
+  background: #0f172a;
+  box-shadow: 0 18px 40px rgba(15,23,42,0.85);
 }
 
+/* MENU GRID */
 #menu-grid {
-  margin-top:8px;
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:14px;
+  margin-top: 8px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 14px;
 }
 
+/* CATEGORY TILES */
 .tile {
-  padding:14px 12px;
-  border-radius:14px;
-  border:1px solid var(--border);
-  cursor:pointer;
-  box-shadow:0 4px 10px rgba(15,23,42,0.12);
-  transition:transform .12s ease, box-shadow .12s ease;
+  padding: 14px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(15,23,42,0.12);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
-.tile:hover { transform:translateY(-2px); }
 
-.tile.dev  { background:rgba(168,85,247,0.2); border-color:rgba(168,85,247,0.55); }
-.tile.bio  { background:rgba(34,197,94,0.2); border-color:rgba(34,197,94,0.55); }
-.tile.cog  { background:rgba(59,130,246,0.2); border-color:rgba(59,130,246,0.55); }
-.tile.sens { background:rgba(249,115,22,0.22); border-color:rgba(249,115,22,0.6); }
-.tile.stats{ background:rgba(236,72,153,0.22); border-color:rgba(236,72,153,0.6); }
+.tile.dev { background: var(--purple-bg); border-color: var(--purple-border); }
+.tile.bio { background: var(--green-bg); border-color: var(--green-border); }
+.tile.cog { background: var(--blue-bg); border-color: var(--blue-border); }
+.tile.sens { background: var(--orange-bg); border-color: var(--orange-border); }
+.tile.stats { background: var(--pink-bg); border-color: var(--pink-border); }
 
-.tile-header { display:flex; gap:8px; align-items:center; }
+.tile-header { display: flex; gap: 8px; align-items: center; }
+
 .tile-icon {
-  width:26px; height:26px;
-  border-radius:999px;
-  background:rgba(255,255,255,0.7);
-  display:flex; justify-content:center; align-items:center;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255,255,255,0.75);
+  font-size: 1.1rem;
 }
 
-.container { margin-top:14px; display:flex; gap:12px; flex-wrap:wrap; }
+.tile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(15,23,42,0.35);
+}
+
+/* GAME CARD HEADER */
+#game-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* RESTORED LARGE BUTTON */
+.button {
+  border: none;
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  background: #1d4ed8;
+  color: white;
+  box-shadow: 0 4px 12px rgba(37,99,235,0.5);
+}
+
+.button.secondary {
+  background: #475569;
+  color: white;
+}
+
+body.dark .button.secondary {
+  background: #334155;
+  color: white;
+}
+
+/* STATUS BAR */
+#status-bar {
+  margin-top: 8px;
+  padding: 6px 12px;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 999px;
+  border: 1px solid #dbeafe;
+  background: #eff6ff;
+}
+
+body.dark #status-bar {
+  background: #1e293b;
+  border-color: #3b82f6;
+}
+
+/* GAME COLUMNS */
+.container {
+  margin-top: 14px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
 
 .column {
-  flex:1 1 260px;
-  background:#f9fafb;
-  border-radius:12px;
-  padding:10px;
-  border:1px solid var(--border);
-  max-height:60vh;
-  overflow-y:auto;
+  flex: 1 1 260px;
+  background: #f9fafb;
+  border-radius: 12px;
+  padding: 10px;
+  border: 1px solid var(--border);
+  max-height: 60vh;
+  overflow-y: auto;
 }
 
+body.dark .column {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+/* ITEMS */
 .item {
-  padding:7px 9px;
-  margin:3px 0;
-  border-radius:9px;
-  background:white;
-  border:1px solid #d1d5db;
-  cursor:pointer;
-}
-.item.selected { outline:2px solid var(--primary); }
-.item.matched { background:var(--correct); border-color:green; }
-
-#teacherPanel {
-  display:none;
-  position:fixed; bottom:16px; right:16px;
-  background:#0f172a; color:white;
-  padding:10px 14px; border-radius:12px;
+  padding: 7px 9px;
+  margin: 3px 0;
+  border-radius: 9px;
+  background: white;
+  border: 1px solid #d1d5db;
+  cursor: pointer;
 }
 
-.hidden { display:none; }
+body.dark .item {
+  background: #0f172a;
+  border-color: #475569;
+  color: var(--text-dark);
+}
+
+.item:hover {
+  background: #e0ecff;
+}
+
+body.dark .item:hover {
+  background: #334155;
+}
+
+.item.selected {
+  outline: 2px solid var(--primary);
+}
+
+.item.matched {
+  background: var(--correct);
+  border-color: #16a34a;
+  color: var(--correct-text);
+}
+
+#teachBlock {
+  background: rgba(0,0,0,0.05);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+body.dark #teachBlock {
+  background: rgba(255,255,255,0.08);
+}
 </style>
 </head>
-
 <body>
-<div class="page">
 
+<div class="page">
 <h1>AP Psych Matching Review</h1>
 <h3 class="subtitle">Tap a set, then match terms to definitions.</h3>
 
+<!-- TOP BAR -->
 <div id="top-bar">
-  <label class="toggle-group"><input type="checkbox" id="darkToggle">Dark mode</label>
-  <label class="toggle-group"><input type="checkbox" id="timerToggle">Timer</label>
-  <label class="toggle-group"><input type="checkbox" id="teachToggle">Teach mode</label>
+  <label class="toggle-group">
+    <input type="checkbox" id="darkToggle"> Dark Mode
+  </label>
+  <label class="toggle-group">
+    <input type="checkbox" id="timerToggle"> Timer
+  </label>
+  <label class="toggle-group">
+    <input type="checkbox" id="teachToggle"> Teach Mode
+  </label>
 </div>
 
-<!-- MENU -->
+<!-- MENU CARD -->
 <div id="menu-card">
   <p style="margin:6px 2px 10px; font-size:0.9rem; color:var(--text-muted);">
-    Choose a topic set. <strong>Shift+T</strong> opens teacher tools.
+    Choose a topic set (8–10 pairs per group).  
+    <strong>Hint:</strong> Press <kbd>Shift</kbd> + <kbd>T</kbd> for teacher tools.
   </p>
 
   <div id="menu-grid">
 
-    <!-- Groups 1–15 -->
-    <div class="tile dev" data-group="1"><div class="tile-header"><div class="tile-icon">🧸</div><div><div class="tile-title">Group 1: Attachment</div></div></div></div>
-    <div class="tile dev" data-group="2"><div class="tile-header"><div class="tile-icon">🌱</div><div><div class="tile-title">Group 2: Erikson</div></div></div></div>
-    <div class="tile dev" data-group="3"><div class="tile-header"><div class="tile-icon">🎓</div><div><div class="tile-title">Group 3: Identity</div></div></div></div>
+    <!-- DEVELOPMENT -->
+    <div class="tile dev" data-group="1">
+      <div class="tile-header">
+        <div class="tile-icon">🧸</div>
+        <div>
+          <div class="tile-title">Group 1: Attachment</div>
+          <div class="tile-subtitle">Ainsworth, parenting styles</div>
+        </div>
+      </div>
+    </div>
 
-    <div class="tile bio" data-group="4"><div class="tile-header"><div class="tile-icon">💊</div><div><div class="tile-title">Group 4: Neurotransmitters</div></div></div></div>
-    <div class="tile bio" data-group="5"><div class="tile-header"><div class="tile-icon">🔋</div><div><div class="tile-title">Group 5: Nervous System</div></div></div></div>
-    <div class="tile bio" data-group="6"><div class="tile-header"><div class="tile-icon">🧠</div><div><div class="tile-title">Group 6: Brain Structures</div></div></div></div>
-    <div class="tile bio" data-group="7"><div class="tile-header"><div class="tile-icon">⚡</div><div><div class="tile-title">Group 7: Neurons</div></div></div></div>
-    <div class="tile bio" data-group="8"><div class="tile-header"><div class="tile-icon">💤</div><div><div class="tile-title">Group 8: Sleep & Drugs</div></div></div></div>
+    <div class="tile dev" data-group="2">
+      <div class="tile-header">
+        <div class="tile-icon">🌱</div>
+        <div>
+          <div class="tile-title">Group 2: Erikson</div>
+          <div class="tile-subtitle">Psychosocial stages</div>
+        </div>
+      </div>
+    </div>
 
-    <div class="tile cog" data-group="9"><div class="tile-header"><div class="tile-icon">💭</div><div><div class="tile-title">Group 9: Memory</div></div></div></div>
+    <div class="tile dev" data-group="3">
+      <div class="tile-header">
+        <div class="tile-icon">🎓</div>
+        <div>
+          <div class="tile-title">Group 3: Identity</div>
+          <div class="tile-subtitle">Marcia’s Identity Theory</div>
+        </div>
+      </div>
+    </div>
 
-    <div class="tile sens" data-group="10"><div class="tile-header"><div class="tile-icon">👁</div><div><div class="tile-title">Group 10: Sensation</div></div></div></div>
-    <div class="tile sens" data-group="11"><div class="tile-header"><div class="tile-icon">🔷</div><div><div class="tile-title">Group 11: Gestalt & Depth</div></div></div></div>
+    <!-- BIOLOGY -->
+    <div class="tile bio" data-group="4">
+      <div class="tile-header">
+        <div class="tile-icon">💊</div>
+        <div>
+          <div class="tile-title">Group 4: Neurotransmitters</div>
+          <div class="tile-subtitle">Effects & imbalances</div>
+        </div>
+      </div>
+    </div>
 
-    <div class="tile stats" data-group="12"><div class="tile-header"><div class="tile-icon">🔬</div><div><div class="tile-title">Group 12: Research I</div></div></div></div>
-    <div class="tile stats" data-group="13"><div class="tile-header"><div class="tile-icon">📊</div><div><div class="tile-title">Group 13: Stats I & II</div></div></div></div>
-    <div class="tile stats" data-group="14"><div class="tile-header"><div class="tile-icon">📈</div><div><div class="tile-title">Group 14: Data Analysis II</div></div></div></div>
-    <div class="tile stats" data-group="15"><div class="tile-header"><div class="tile-icon">⚖️</div><div><div class="tile-title">Group 15: Ethics</div></div></div></div>
+    <div class="tile bio" data-group="5">
+      <div class="tile-header">
+        <div class="tile-icon">🔋</div>
+        <div>
+          <div class="tile-title">Group 5: Nervous System</div>
+          <div class="tile-subtitle">Divisions & functions</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tile bio" data-group="6">
+      <div class="tile-header">
+        <div class="tile-icon">🧠</div>
+        <div>
+          <div class="tile-title">Group 6: Brain Structures</div>
+          <div class="tile-subtitle">Regions & functions</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tile bio" data-group="7">
+      <div class="tile-header">
+        <div class="tile-icon">⚡</div>
+        <div>
+          <div class="tile-title">Group 7: Neurons</div>
+          <div class="tile-subtitle">Parts & firing</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tile bio" data-group="8">
+      <div class="tile-header">
+        <div class="tile-icon">💤</div>
+        <div>
+          <div class="tile-title">Group 8: Sleep & Drugs</div>
+          <div class="tile-subtitle">Consciousness</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COGNITION -->
+    <div class="tile cog" data-group="9">
+      <div class="tile-header">
+        <div class="tile-icon">💭</div>
+        <div>
+          <div class="tile-title">Group 9: Memory</div>
+          <div class="tile-subtitle">Processes & effects</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SENSATION & PERCEPTION -->
+    <div class="tile sens" data-group="10">
+      <div class="tile-header">
+        <div class="tile-icon">👁</div>
+        <div>
+          <div class="tile-title">Group 10: Sensation</div>
+          <div class="tile-subtitle">Detection & thresholds</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tile sens" data-group="11">
+      <div class="tile-header">
+        <div class="tile-icon">🔷</div>
+        <div>
+          <div class="tile-title">Group 11: Gestalt & Depth</div>
+          <div class="tile-subtitle">Gestalt rules</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESEARCH & STATS -->
+    <div class="tile stats" data-group="12">
+      <div class="tile-header">
+        <div class="tile-icon">🔬</div>
+        <div>
+          <div class="tile-title">Group 12: Research Methods</div>
+          <div class="tile-subtitle">Variables & design</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tile stats" data-group="13">
+      <div class="tile-header">
+        <div class="tile-icon">📊</div>
+        <div>
+          <div class="tile-title">Group 13: Statistics I & II</div>
+          <div class="tile-subtitle">Descriptives + correlation</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tile stats" data-group="14">
+      <div class="tile-header">
+        <div class="tile-icon">📈</div>
+        <div>
+          <div class="tile-title">Group 14: Data Analysis</div>
+          <div class="tile-subtitle">Quantitative vs qualitative</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tile stats" data-group="15">
+      <div class="tile-header">
+        <div class="tile-icon">⚖️</div>
+        <div>
+          <div class="tile-title">Group 15: Ethics</div>
+          <div class="tile-subtitle">APA rules</div>
+        </div>
+      </div>
+    </div>
 
   </div>
 </div>
 
 <!-- GAME CARD -->
 <div id="game-card" class="hidden">
-  <h2 id="gameHeader"></h2>
+
+  <div id="game-header-row">
+    <div>
+      <h2 id="gameHeader"></h2>
+      <p style="margin:0; font-size:0.85rem; color:var(--text-muted);">
+        Select a term, then tap its matching definition.
+      </p>
+    </div>
+
+    <button class="button secondary" id="backBtn">Back to Menu</button>
+  </div>
 
   <div id="status-bar">
     <span id="score">Score: 0 / 0</span>
@@ -210,208 +478,52 @@ body.dark #menu-card, body.dark #game-card {
   </div>
 
   <div class="container">
-    <div class="column" id="termsCol"><h3>Terms</h3></div>
-    <div class="column" id="defsCol"><h3>Definitions</h3></div>
+    <div class="column" id="termsCol">
+      <h3>Terms</h3>
+    </div>
+
+    <div class="column" id="defsCol">
+      <h3>Definitions</h3>
+    </div>
   </div>
 
-  <div id="teachBlock" class="hidden"></div>
+  <div id="teachBlock" class="hidden" style="margin-top:10px; font-size:0.85rem;"></div>
 
   <p id="message"></p>
   <div id="celebration" class="hidden"></div>
 
-  <button id="backBtn">Back to menu</button>
-  <button id="resetBtn">Restart set</button>
-</div>
+  <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
+    <button class="button secondary" id="resetBtn">Restart Set</button>
+  </div>
 
-<!-- GROUP DATA -->
+</div> <!-- END GAME CARD -->
 <script>
-const groups = {
-  1: [
-    ["Secure attachment","Comforted when caregiver returns"],
-    ["Avoidant attachment","Avoids caregiver; little distress"],
-    ["Anxious/ambivalent","Clingy, hard to soothe"],
-    ["Harlow's research","Monkeys prefer comfort over food"],
-    ["Authoritative","High warmth + rules"],
-    ["Authoritarian","Strict, low warmth"],
-    ["Permissive","Warm, few limits"],
-    ["Neglectful","Low warmth & control"]
-  ],
-
-  2: [
-    ["Trust vs mistrust","Infants: world is safe?"],
-    ["Autonomy vs shame","Toddlers: independence"],
-    ["Initiative vs guilt","Kids plan & try"],
-    ["Industry vs inferiority","Master skills"],
-    ["Identity vs role confusion","Teens explore values"],
-    ["Intimacy vs isolation","Adult relationships"],
-    ["Generativity vs stagnation","Contribution"],
-    ["Integrity vs despair","Reflect on life"]
-  ],
-
-  3: [
-    ["Identity achievement","Explored + committed"],
-    ["Identity diffusion","No exploration/commitment"],
-    ["Moratorium","Exploring"],
-    ["Foreclosure","Committed w/o exploring"],
-    ["Exploration","Considering options"],
-    ["Commitment","Investment in choice"],
-    ["Self-concept","View of self"],
-    ["Future direction","Goals & plans"]
-  ],
-
-  4: [
-    ["Serotonin","Low = depression"],
-    ["Dopamine","High = schizophrenia; reward"],
-    ["Acetylcholine","Memory; low in Alzheimer's"],
-    ["Endorphins","Pain relief"],
-    ["Norepinephrine","Alertness"],
-    ["GABA","Calming"],
-    ["Glutamate","Excitatory; memory"],
-    ["SSRI","Blocks serotonin reuptake"]
-  ],
-
-  5: [
-    ["CNS","Brain + spinal cord"],
-    ["PNS","All other nerves"],
-    ["Somatic NS","Voluntary movement"],
-    ["Autonomic NS","Involuntary control"],
-    ["Sympathetic","Fight-or-flight"],
-    ["Parasympathetic","Rest & digest"],
-    ["Motor neurons","Signal to muscles"],
-    ["Sensory neurons","Signal to brain"]
-  ],
-
-  6: [
-    ["Amygdala","Fear & aggression"],
-    ["Hippocampus","Memory formation"],
-    ["Hypothalamus","Hunger, thirst, drives"],
-    ["Pituitary","Master hormone gland"],
-    ["Thalamus","Sensory relay"],
-    ["Medulla","Heartbeat & breathing"],
-    ["Pons","Sleep & arousal"],
-    ["Cerebellum","Balance & coordination"]
-  ],
-
-  7: [
-    ["Dendrites","Receive messages"],
-    ["Cell body","Keeps neuron alive"],
-    ["Axon","Sends messages"],
-    ["Myelin sheath","Speeds impulses"],
-    ["Synapse","Gap between neurons"],
-    ["Reuptake","Neurotransmitters reabsorbed"],
-    ["Action potential","All-or-none firing"],
-    ["All-or-none","Full fire or not at all"]
-  ],
-
-  8: [
-    ["Circadian rhythm","Biological clock"],
-    ["REM sleep","Dreaming; paralysis"],
-    ["Sleep deprivation","Hurts memory & focus"],
-    ["Tolerance","Need more drug"],
-    ["Withdrawal","Symptoms after stopping"],
-    ["Depressants","Slow CNS"],
-    ["Stimulants","Speed CNS"],
-    ["Hallucinogens","Distort perception"]
-  ],
-
-  9: [
-    ["Encoding","Getting info in"],
-    ["Storage","Keeping info"],
-    ["Retrieval","Taking info out"],
-    ["Primacy effect","Remember first items"],
-    ["Recency effect","Remember last items"],
-    ["Chunking","Grouping info"],
-    ["Method of loci","Memory palace"],
-    ["Flashbulb memory","Emotionally vivid memory"]
-  ],
-
-  10: [
-    ["Sensation","Detecting stimuli"],
-    ["Perception","Interpreting stimuli"],
-    ["Absolute threshold","Detect 50% of time"],
-    ["Difference threshold","Smallest detectable difference"],
-    ["Sensory adaptation","Reduced sensitivity"],
-    ["Selective attention","Focusing on one input"],
-    ["Top-down processing","Using expectations"],
-    ["Bottom-up processing","Starting with raw input"]
-  ],
-
-  11: [
-    ["Figure-ground","Object vs background"],
-    ["Closure","Fill in gaps"],
-    ["Proximity","Near = grouped"],
-    ["Similarity","Similar = grouped"],
-    ["Linear perspective","Lines converge"],
-    ["Retinal disparity","Eye differences = depth"],
-    ["Convergence","Eye turning inward"],
-    ["Interposition","Blocking object = closer"]
-  ],
-
-  12: [
-    ["Hypothesis","Testable prediction"],
-    ["Operational definition","Measurable definition"],
-    ["IV","Manipulated variable"],
-    ["DV","Measured variable"],
-    ["Confounding variable","Extra influence"],
-    ["Random assignment","Equal group chance"],
-    ["Random sample","Equal population chance"],
-    ["Population","Group of interest"]
-  ],
-
-  13: [
-    ["Mean","Average score"],
-    ["Median","Middle score"],
-    ["Mode","Most common score"],
-    ["Range","High–low"],
-    ["Standard deviation","Score spread"],
-    ["Correlation coefficient","Strength/direction"],
-    ["Positive correlation","Both increase"],
-    ["Negative correlation","One up, one down"]
-  ],
-
-  14: [
-    ["Quantitative data","Numerical"],
-    ["Qualitative data","Descriptive"],
-    ["Statistical significance","Not due to chance"],
-    ["P-value","Chance probability"],
-    ["Effect size","Strength of effect"]
-  ],
-
-  15: [
-    ["Informed consent","Participants informed"],
-    ["Right to withdraw","Can leave anytime"],
-    ["Confidentiality","Info kept private"],
-    ["Debriefing","Explain study afterward"],
-    ["Protection from harm","Avoid lasting harm"]
-  ]
-};
-</script>
-
-<!-- MAIN SCRIPT -->
-<script>
+// ---------- STATE ----------
 let currentGroup = null;
 let termSelection = null;
 let defSelection = null;
 let score = 0;
 let streak = 0;
-let timerOn = false;
-let timerInterval = null;
 let startTime = null;
+let timerInterval = null;
+let timerOn = false;
 let teachMode = false;
 
-function $(id){ return document.getElementById(id); }
+// ---------- UTILITIES ----------
+function $(id) { return document.getElementById(id); }
 
-function shuffle(arr){
-  for(let i=arr.length-1;i>0;i--){
-    const j=Math.floor(Math.random()*(i+1));
-    [arr[i],arr[j]]=[arr[j],arr[i]];
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
   }
   return arr;
 }
 
-function openSet(num){
+// ---------- GAME LOGIC ----------
+function openSet(num) {
   currentGroup = groups[num];
-  if(!currentGroup) return;
+  if (!currentGroup) return;
 
   $("menu-card").classList.add("hidden");
   $("game-card").classList.remove("hidden");
@@ -420,172 +532,236 @@ function openSet(num){
   $("message").textContent = "";
   $("celebration").classList.add("hidden");
 
-  streak = 0; score = 0;
+  streak = 0;
+  score = 0;
   updateScoreAndStreak();
 
-  if(timerInterval) clearInterval(timerInterval);
-
-  if(timerOn){
+  if (timerInterval) clearInterval(timerInterval);
+  if (timerOn) {
     startTime = Date.now();
-    timerInterval = setInterval(updateTimer,250);
+    timerInterval = setInterval(updateTimer, 250);
   } else {
     $("timerDisplay").textContent = "Time: 0s";
   }
 
   buildColumns();
 
-  if(teachMode) showTeachBlock();
+  if (teachMode) showTeachBlock();
   else $("teachBlock").classList.add("hidden");
 }
 
-function buildColumns(){
+function buildColumns() {
   const termsCol = $("termsCol");
   const defsCol = $("defsCol");
 
   termsCol.innerHTML = "<h3>Terms</h3>";
   defsCol.innerHTML = "<h3>Definitions</h3>";
 
-  const idx = currentGroup.map((_,i)=>i);
+  const idx = currentGroup.map((_, i) => i);
   const shuffledTerms = shuffle([...idx]);
   const shuffledDefs = shuffle([...idx]);
 
-  shuffledTerms.forEach(i=>{
-    const div=document.createElement("div");
-    div.className="item"; div.dataset.index=i;
-    div.textContent=currentGroup[i][0];
-    div.onclick=()=>selectTerm(div);
+  shuffledTerms.forEach(i => {
+    const div = document.createElement("div");
+    div.className = "item";
+    div.dataset.index = i;
+    div.textContent = currentGroup[i][0];
+    div.onclick = () => selectTerm(div);
     termsCol.appendChild(div);
   });
 
-  shuffledDefs.forEach(i=>{
-    const div=document.createElement("div");
-    div.className="item"; div.dataset.index=i;
-    div.textContent=currentGroup[i][1];
-    div.onclick=()=>selectDef(div);
+  shuffledDefs.forEach(i => {
+    const div = document.createElement("div");
+    div.className = "item";
+    div.dataset.index = i;
+    div.textContent = currentGroup[i][1];
+    div.onclick = () => selectDef(div);
     defsCol.appendChild(div);
   });
+
+  score = 0;
+  updateScoreAndStreak();
 }
 
-function showTeachBlock(){
-  const block=$("teachBlock");
-  block.classList.remove("hidden");
-  let html="<strong>Study view:</strong><ul>";
-  currentGroup.forEach(([t,d])=>html+=`<li><strong>${t}</strong>: ${d}</li>`);
-  html+="</ul>";
-  block.innerHTML=html;
+function showTeachBlock() {
+  const el = $("teachBlock");
+  el.classList.remove("hidden");
+
+  let html = "<strong>Study view:</strong><ul style='margin-top:4px; padding-left:18px;'>";
+  currentGroup.forEach(([t, d]) => {
+    html += `<li><strong>${t}</strong>: ${d}</li>`;
+  });
+  html += "</ul>";
+
+  el.innerHTML = html;
 }
 
-function selectTerm(el){
-  if(el.classList.contains("matched")) return;
-  termSelection=el;
-  document.querySelectorAll("#termsCol .item").forEach(e=>e.classList.remove("selected"));
+function selectTerm(el) {
+  if (el.classList.contains("matched")) return;
+
+  termSelection = el;
+  document.querySelectorAll("#termsCol .item").forEach(e => e.classList.remove("selected"));
   el.classList.add("selected");
+
   tryMatch();
 }
 
-function selectDef(el){
-  if(el.classList.contains("matched")) return;
-  defSelection=el;
-  document.querySelectorAll("#defsCol .item").forEach(e=>e.classList.remove("selected"));
+function selectDef(el) {
+  if (el.classList.contains("matched")) return;
+
+  defSelection = el;
+  document.querySelectorAll("#defsCol .item").forEach(e => e.classList.remove("selected"));
   el.classList.add("selected");
+
   tryMatch();
 }
 
-function tryMatch(){
-  if(!termSelection || !defSelection) return;
+function tryMatch() {
+  if (!termSelection || !defSelection) return;
 
-  const correct = termSelection.dataset.index===defSelection.dataset.index;
+  const correct = termSelection.dataset.index === defSelection.dataset.index;
 
-  if(correct){
+  if (correct) {
     termSelection.classList.add("matched");
     defSelection.classList.add("matched");
     termSelection.classList.remove("selected");
     defSelection.classList.remove("selected");
 
-    termSelection=null;
-    defSelection=null;
+    termSelection = null;
+    defSelection = null;
 
-    score++; streak++;
-    $("message").textContent="✅ Correct!";
+    score++;
+    streak++;
+    $("message").textContent = "✅ Correct!";
     updateScoreAndStreak();
 
-    if(score===currentGroup.length) endRoundSuccess();
+    if (score === currentGroup.length) {
+      endRoundSuccess();
+    }
 
   } else {
-    streak=0;
-    $("message").textContent="❌ Try again.";
-    const t=termSelection, d=defSelection;
-    termSelection=null; defSelection=null;
-    setTimeout(()=>{ t.classList.remove("selected"); d.classList.remove("selected"); },300);
+    streak = 0;
+    $("message").textContent = "❌ Try again.";
+
+    const t = termSelection;
+    const d = defSelection;
+
+    termSelection = null;
+    defSelection = null;
+
+    setTimeout(() => {
+      t.classList.remove("selected");
+      d.classList.remove("selected");
+    }, 300);
   }
 }
 
-function updateScoreAndStreak(){
-  $("score").textContent=`Score: ${score} / ${currentGroup.length}`;
-  $("streak").textContent=`Streak: ${streak}`;
+function updateScoreAndStreak() {
+  $("score").textContent = `Score: ${score} / ${currentGroup.length}`;
+  $("streak").textContent = `Streak: ${streak}`;
 }
 
-function updateTimer(){
-  if(!startTime) return;
-  const sec=Math.floor((Date.now()-startTime)/1000);
-  $("timerDisplay").textContent=`Time: ${sec}s`;
+function updateTimer() {
+  if (!startTime) return;
+  const elapsed = Math.floor((Date.now() - startTime) / 1000);
+  $("timerDisplay").textContent = `Time: ${elapsed}s`;
 }
 
-function endRoundSuccess(){
-  $("message").textContent="🎉 All matches found!";
-  $("celebration").textContent="✨ Great job! ✨";
+function endRoundSuccess() {
+  $("message").textContent = "🎉 All matches found!";
+  $("celebration").textContent = "✨ Great job! ✨";
   $("celebration").classList.remove("hidden");
-  if(timerInterval) clearInterval(timerInterval);
+
+  if (timerInterval) clearInterval(timerInterval);
 }
 
-// EVENT LISTENERS
-document.addEventListener("DOMContentLoaded",()=>{
+// ---------- TEACHER TOOLS ----------
+let teacherPanelVisible = false;
 
-  document.querySelectorAll(".tile").forEach(tile=>{
-    tile.onclick=()=>openSet(parseInt(tile.dataset.group));
+function toggleTeacherPanel() {
+  teacherPanelVisible = !teacherPanelVisible;
+  $("teacherPanel").style.display = teacherPanelVisible ? "block" : "none";
+}
+
+function revealAllAnswers() {
+  if (!currentGroup) return;
+
+  document.querySelectorAll("#termsCol .item").forEach(e => e.classList.add("matched"));
+  document.querySelectorAll("#defsCol .item").forEach(e => e.classList.add("matched"));
+
+  score = currentGroup.length;
+  updateScoreAndStreak();
+
+  $("message").textContent = "👀 All answers revealed.";
+}
+
+function resetProgress() {
+  streak = 0;
+  $("message").textContent = "Progress reset.";
+}
+
+// ---------- EVENT HOOKUP ----------
+document.addEventListener("DOMContentLoaded", () => {
+
+  // Load menu tiles
+  document.querySelectorAll(".tile").forEach(tile => {
+    tile.onclick = () => openSet(parseInt(tile.dataset.group));
   });
 
-  $("backBtn").onclick=()=>{
+  // Back to menu
+  $("backBtn").onclick = () => {
     $("game-card").classList.add("hidden");
     $("menu-card").classList.remove("hidden");
-    $("message").textContent="";
     $("celebration").classList.add("hidden");
-    if(timerInterval) clearInterval(timerInterval);
+    $("message").textContent = "";
+
+    if (timerInterval) clearInterval(timerInterval);
   };
 
-  $("resetBtn").onclick=()=>{
-    if(!currentGroup) return;
-    $("message").textContent="";
+  // Restart set
+  $("resetBtn").onclick = () => {
+    if (!currentGroup) return;
+
+    $("message").textContent = "";
     $("celebration").classList.add("hidden");
+
     buildColumns();
-    if(teachMode) showTeachBlock();
+    if (teachMode) showTeachBlock();
 
-    if(timerOn){
-      if(timerInterval) clearInterval(timerInterval);
-      startTime=Date.now();
-      timerInterval=setInterval(updateTimer,250);
+    if (timerOn) {
+      if (timerInterval) clearInterval(timerInterval);
+      startTime = Date.now();
+      timerInterval = setInterval(updateTimer, 250);
     }
   };
 
-  $("darkToggle").onchange=e=>{
-    document.body.classList.toggle("dark",e.target.checked);
+  // Toggles
+  $("darkToggle").onchange = e => {
+    document.body.classList.toggle("dark", e.target.checked);
   };
 
-  $("timerToggle").onchange=e=>{
-    timerOn=e.target.checked;
-    if(!timerOn && timerInterval){
+  $("timerToggle").onchange = e => {
+    timerOn = e.target.checked;
+    if (!timerOn && timerInterval) {
       clearInterval(timerInterval);
-      $("timerDisplay").textContent="Time: 0s";
+      $("timerDisplay").textContent = "Time: 0s";
     }
   };
 
-  $("teachToggle").onchange=e=>{
-    teachMode=e.target.checked;
-    if(teachMode && currentGroup) showTeachBlock();
+  $("teachToggle").onchange = e => {
+    teachMode = e.target.checked;
+    if (teachMode && currentGroup) showTeachBlock();
     else $("teachBlock").classList.add("hidden");
   };
 
+  // Teacher panel shortcuts
+  $("revealBtn").onclick = revealAllAnswers;
+  $("resetProgressBtn").onclick = resetProgress;
+
+  document.addEventListener("keydown", e => {
+    if (e.shiftKey && e.key.toLowerCase() === "t") {
+      toggleTeacherPanel();
+    }
+  });
 });
 </script>
-</body>
-</html>
