@@ -32,6 +32,26 @@ body.dark {
   background: #020617;
   color: var(--text-dark);
 }
+/* FIX DARK MODE TILE + ITEM CONTRAST */
+body.dark .tile,
+body.dark .column,
+body.dark .item {
+  background: #1e293b !important;  /* dark slate background */
+  color: #f1f5f9 !important;        /* bright readable text */
+  border-color: #334155 !important;
+}
+
+body.dark .item.matched {
+  background: #14532d !important;   /* readable green */
+  color: #d1fae5 !important;
+}
+
+body.dark h3,
+body.dark #status-bar span,
+body.dark #gameHeader,
+body.dark #message {
+  color: #f1f5f9 !important;
+}
 
 .page {
   max-width: 960px;
