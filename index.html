@@ -340,6 +340,43 @@ body.dark #game-card {
   </div>
 </div>
 
+<!-- ========================= -->
+<!-- ======== GAME CARD ====== -->
+<!-- ========================= -->
+
+<div id="game-card" class="hidden">
+
+  <div id="game-header-row" style="display:flex; justify-content:space-between; align-items:center;">
+    <div>
+      <h2 id="gameHeader"></h2>
+      <p style="margin:0; font-size:0.85rem; color:var(--text-muted);">
+        Tap a term, then tap its matching definition.
+      </p>
+    </div>
+    <button class="button secondary" id="backBtn">Back to menu</button>
+  </div>
+
+  <div id="status-bar">
+    <span id="score">Score: 0 / 0</span>
+    <span id="streak">Streak: 0</span>
+    <span id="timerDisplay">Time: 0s</span>
+  </div>
+
+  <div class="container">
+    <div class="column" id="termsCol"><h3>Terms</h3></div>
+    <div class="column" id="defsCol"><h3>Definitions</h3></div>
+  </div>
+
+  <div id="teachBlock" class="hidden" style="margin-top:10px; font-size:0.85rem;"></div>
+
+  <p id="message"></p>
+  <div id="celebration" class="hidden"></div>
+
+  <div style="margin-top:10px; display:flex; flex-wrap:wrap; gap:8px;">
+    <button class="button secondary" id="resetBtn">Restart set</button>
+  </div>
+
+</div>
 
 <!-- =========================================== -->
 <!-- ========== GROUP DEFINITIONS ============== -->
