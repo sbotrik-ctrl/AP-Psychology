@@ -606,6 +606,14 @@ body.dark .button.secondary:hover {
       <button class="button secondary" id="resetBtn">Restart set</button>
     </div>
   </div>
+<div class="tile stats" data-index="12">
+  <div class="tile-icon">📊</div>
+  <div class="tile-title">Data Analysis (Set 1)</div>
+</div>
+<div class="tile stats" data-index="13">
+  <div class="tile-icon">📈</div>
+  <div class="tile-title">Data Analysis (Set 2)</div>
+</div>
 
   <!-- TEACHER PANEL -->
   <div id="teacherPanel">
@@ -751,7 +759,31 @@ const groups = {
     ["Correlation coefficient (r)","Number from −1 to +1 showing strength & direction of relationship"],
     ["Positive correlation","Variables move in same direction"],
     ["Negative correlation","One variable increases as the other decreases"]
-  ]
+  {
+    title: "Data Analysis (Set 1)",
+    icon: "📊",
+    colorClass: "stats",
+    items: [
+      ["Quantitative Data", "Numerical data that can be measured or counted (e.g., test scores)."],
+      ["Qualitative Data", "Descriptive data based on characteristics or categories (e.g., interviews)."],
+      ["Statistical Significance", "Indicates results are unlikely due to chance (often p < .05)."],
+      ["P-Value / P Score", "Probability results occurred by chance; lower values mean stronger evidence."],
+      ["Effect Size", "Magnitude of a difference or relationship, independent of sample size."]
+   {
+    title: "Data Analysis (Set 2)",
+    icon: "📈",
+    colorClass: "stats",
+    items: [
+      ["Descriptive Statistics", "Summarize data (mean, median, mode)."],
+      ["Inferential Statistics", "Allow conclusions/generalization from sample to population."],
+      ["Outlier", "Extreme value that distorts mean and standard deviation."],
+      ["Correlation Coefficient (r)", "Measures strength and direction of a relationship (–1 to +1)."],
+      ["Positive / Negative Correlation", "Positive: variables move together; Negative: variables move oppositely."]
+    ]
+},
+ ]
+},
+]
 };
 
 // ---------- STATE ----------
